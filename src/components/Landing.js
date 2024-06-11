@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 function Landing() {
     return (
         <>
-
             <NavLink to="/Configurateur">
                 <button className="btn btn-primary">
                     Config ta StéphaneMobile
