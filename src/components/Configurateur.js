@@ -1,10 +1,24 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import blanc from "../Assets-TP-Alpine-master/selection/blanc.jpg";
+import bleu from "../Assets-TP-Alpine-master/selection/bleu.jpg";
+import noir from "../Assets-TP-Alpine-master/selection/noir.jpg";
+import { changementDeCouleur } from '../slice/configurateurSlice';
+import Carousel from './Carousel';
 
 
 const Configurateur = () => {
+    const [selectModele, setSelectModele] = useState('blanc')
+    const dispatch = useDispatch()
     const state = useSelector(state => state.configurateur)
+    function handle(e) {
+        let couleur = e.target.classList[0]
+        setSelectModele(couleur)
+        dispatch(changementDeCouleur({
+            color: couleur
+        }))
+    }
     return (
         <>
             <NavLink to="/">
@@ -12,30 +26,23 @@ const Configurateur = () => {
                     retour a la landing
                 </button>
             </NavLink>
-            <div id="carouselExampleFade" className="carousel slide carousel-fade">
-                <div className="carousel-inner">
-                    <div className="carousel-item active">
-                        <img src={state.modele[0]} className="d-block w-100" />
+
+            <div className='container'>
+                <Carousel array={state.modele} />
+
+                <div className='row'>
+                    <div className='col-4 d-flex justify-content-center'>
+                        <button onClick={handle}><img className='blanc' src={blanc} style={{ width: '300px' }} alt="" /></button>
                     </div>
-                    <div className="carousel-item">
-                        <img src={state.modele[1]} className="d-block w-100" />
+                    <div className='col-4 d-flex justify-content-center'>
+                        <button onClick={handle}><img className='bleu' src={bleu} style={{ width: '300px' }} alt="" /></button>
                     </div>
-                    <div className="carousel-item">
-                        <img src={state.modele[2]} className="d-block w-100" />
-                    </div>
-                    <div className="carousel-item">
-                        <img src={state.modele[3]} className="d-block w-100" />
+                    <div className='col-4 d-flex justify-content-center'>
+                        <button onClick={handle}><img className='noir' src={noir} alt="" style={{ width: '300px' }} /></button>
                     </div>
                 </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
-                </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
-                </button>
             </div>
+
         </>
     )
 }
