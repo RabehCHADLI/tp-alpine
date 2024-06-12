@@ -34,7 +34,7 @@ function Gallery() {
             <div className="row">
                 {images.map((image, index) => (
                     <div className="col-lg-4 col-md-6 mb-4" key={index}>
-                        <div className="card" onClick={() => handleShow(image)}>
+                        <div className="card1" onClick={() => handleShow(image)}>
                             <img src={image} className="card-img-top" alt={`Image ${index + 1}`} />
                         </div>
                     </div>

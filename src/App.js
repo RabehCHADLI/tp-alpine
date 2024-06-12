@@ -12,8 +12,8 @@ import Navbar from "./Navbar";
 function App() {
   return (
     <>
-      <Navbar />
       <Router>
+      <Navbar />
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
           <Route path="/configurateur" element={<Configurateur />} />

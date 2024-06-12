@@ -1,3 +1,5 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
 body.modal-open .gallery-container,
 body.modal-open .video-section {
   filter: blur(8px);
@@ -17,6 +19,66 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Navbar */
+.navbar {
+  background-color: #ffffff; /* Fondo blanco */
+  padding: 10px 20px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler-icon {
+  color: #333;
+}
+
+.navbar-nav {
+  margin-left: auto;
+}
+
+.nav-item {
+  margin: 0 10px;
+}
+
+.nav-link {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover, .nav-link:focus, .nav-link.active {
+  color: #007bff; /* Color al pasar el ratón o al estar activo */
+}
+
+@media (max-width: 992px) {
+  .navbar-nav {
+      margin-top: 10px;
+  }
+
+  .nav-item {
+      margin: 5px 0;
+  }
+}
+
+.navbar-logo {
+  width: 250px;
+  height: auto;
+}
+
+/******************************* Video Landing **********************************/
 
 .video-section {
   width: 100%;
@@ -40,18 +102,20 @@ code {
   /* Asegura que el video cubra todo el área manteniendo su proporción */
 }
 
+/******************************* Gallery **********************************/
+
 .gallery-section {
   padding: 20px;
 }
 
-.card {
+.card1 {
   border: none;
   overflow: hidden;
   cursor: pointer;
 }
 
 .card-img-top {
-  transition: transform 0.2s;
+  transition: transform .5s;
 }
 
 .card-img-top:hover {
@@ -65,4 +129,78 @@ code {
 .modal-body img {
   width: 100%;
   height: auto;
+}
+
+/******************************* Carrousel Landing **********************************/
+
+.carousel-section {
+  padding: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  border: none;
+}
+
+.card img {
+  width: 50%; /* Ajusta el ancho de la imagen en la tarjeta */
+  height: auto;
+}
+
+.card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.card-text ul {
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+/******************************* Footer **********************************/
+
+
+.footer {
+  background-color: #212529;
+  color: #fff;
+  padding: 50px 0;
+}
+
+.footer h5 {
+  color: #fff;
+}
+
+.footer p {
+  margin-bottom: 10px;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer ul li {
+  margin-bottom: 10px;
+}
+
+.social-icons li {
+  display: inline;
+  margin-right: 10px;
+}
+
+.social-icons a {
+  color: #fff;
+  font-size: 20px;
+}
+
+.social-icons a:hover {
+  color: #007bff;
 }
