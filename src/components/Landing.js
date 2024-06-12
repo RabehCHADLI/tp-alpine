@@ -4,6 +4,7 @@ import Gallery from './Gallery'; // Importa el componente de la galería
 import CarCarousel from "./CarCarousel";
 import { Navbar } from "react-bootstrap";
 import Footer from "./Footer";
+import AlpineBeforeAfter from "./AlpineBefore&After";
 
 
 function Landing() {
@@ -28,6 +29,9 @@ function Landing() {
                 <CarCarousel />
             </section>
 
+            <section className="BeforeAfter">
+                <AlpineBeforeAfter/>
+            </section>
             <Footer />
         </>
     );
