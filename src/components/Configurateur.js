@@ -13,29 +13,60 @@ import Carousel from './Carousel';
 const Configurateur = () => {
     const [selectModele, setSelectModele] = useState(false);
     const [selectJante, setSelectJante] = useState(false);
+    const [selectSiege, setSelectSiege] = useState(false);
+    const [selectAccessoires, setSelectAccessoires] = useState(false);
     const [pureOuLegend, setPureOuLegend] = useState('');
     const [jante, setJante] = useState('');
     const [selectColor, setSelectColor] = useState('blanc');
     const dispatch = useDispatch();
     const state = useSelector(state => state.configurateur);
 
+    function navConfig() {
+        return (
+            <div className='container-fluid mt-5' >
+                <div className='row justify-content-center'>
+                    <div className='col d-flex justify-content-center'>
+                        <button onClick={next} className='btn btn-secondary bg-blueAlpine text-white'>Couleur</button>
+                    </div>
+                    <div className='col d-flex justify-content-center'>
+                        <button onClick={next1} className='btn btn-secondary text-white bg-blueAlpine'>Jantes</button>
+                    </div>
+                    <div className='col d-flex justify-content-center'>
+                        <button onClick={next2} className='btn btn-secondary text-white bg-blueAlpine'>Scellerie</button>
+                    </div>
+                    <div className='col d-flex justify-content-center'>
+                        <button className='btn btn-secondary text-white bg-blueAlpine'>Equipements</button>
+                    </div>
+                    <div className='col d-flex justify-content-center'>
+                        <button className='btn btn-secondary bg-blueAlpine text-white'>Accessoires</button>
+                    </div>
+
+                </div>
+            </div>
+        )
+    }
     function handleSelect(e) {
         setPureOuLegend(e.target.classList[0]);
         let jannte = e.target.classList[0];
         if (jannte === 'legende') {
-            setJante(jannte);
+            setJante('legende');
+            console.log('coucou');
         } else {
-            setJante(e.target.classList[1]);
+            setJante('standard');
         }
+        console.log(jante);
         setSelectModele(true);
     }
     function handle(e) {
         let couleur = e.target.classList[0];
         setSelectColor(couleur);
+        let jannte = jante
+        console.log(state.modele[0]);
+
         dispatch(changementDeCouleur({
             color: couleur,
             modele: pureOuLegend,
-            jante: jante
+            jante: jannte
         }));
     }
     function handleJante(e) {
@@ -48,9 +79,23 @@ const Configurateur = () => {
             jante: jannte
         }))
     }
+    function next() {
+        setSelectJante(false);
+        setSelectModele(true);
+
+
+        dispatch(changementDeCouleur({
+            color: selectColor,
+            modele: pureOuLegend,
+            jante: jante
+        }));
+
+    }
     function next1() {
         setSelectJante(true);
         setSelectModele(true);
+        setSelectSiege(false)
+
         let jannte = 'standard';
 
         setJante(jannte => {
@@ -61,8 +106,37 @@ const Configurateur = () => {
             }));
             return jannte;
         });
-    }
 
+    }
+    function next2(e) {
+        setSelectJante(true);
+        setSelectModele(true);
+        setSelectSiege(true)
+    }
+    function scellerie() {
+        if (pureOuLegend == 'pure') {
+            return (
+
+                <Carousel array={state.scelleriePure} />
+            )
+
+        } else {
+            return (
+                <>
+                    <div className='container'>
+
+
+                        <Carousel array={state.scellerieLegende} />
+                        <div className='row justify-content-center'>
+                            <button className='btn btn-secondary col-3 me-3'>Cuir noir</button>
+                            <button className='btn btn-secondary col-3 '>Cuir brun</button>
+                        </div>
+                    </div>
+                </>
+            )
+
+        }
+    }
     return (
         <>
             <NavLink to="/">
@@ -74,57 +148,87 @@ const Configurateur = () => {
                 <>
                     {selectJante ? (
                         <>
-                            <h2 className='text-center'>Choisit les jantes</h2>
-                            <div className='container'>
-
-                                <Carousel array={state.modele} />
-                                <div className="container">
-                                    <div className='row justify-content-center'>
-
-                                        {pureOuLegend === 'pure' ? (
+                            {selectSiege ? (
+                                <>
+                                    {
+                                        selectAccessoires ? (
                                             <>
-                                                <div className='col-3'>
-                                                    <h6 className='text-center'>Standard</h6>
-                                                    <button onClick={handleJante} className='btn btn-light'><img className='standard' src={state.jantepure[0]} alt="" /></button>
-
-                                                </div>
-                                                <div className='col-3'>
-                                                    <h6 className='text-center'>Sérac</h6>
-
-                                                    <button onClick={handleJante} className='btn btn-light'><img className='serac' src={state.jantepure[1]} alt="" /></button>
-
-                                                </div>
-                                                <button className='btn btn-secondary'>Valider</button>
 
                                             </>
                                         ) : (
                                             <>
-                                                <h4 className='text-center'>Ce modéle est compatible qu'avec les jante 'Legend'</h4>
-
-                                                <button className='btn btn-secondary text-center' style={{ width: '150px' }}>Valider</button>
+                                                {scellerie()}
+                                                {navConfig()}
                                             </>
-                                        )}
+
+                                        )
+                                    }
+
+
+                                </>
+                            ) : (
+                                <>
+
+                                    <h2 className='text-center'>Choisit les jantes</h2>
+                                    <div className='container'>
+
+                                        <Carousel array={state.modele} />
+                                        <div className="container">
+                                            <div className='row justify-content-center'>
+
+                                                {pureOuLegend === 'pure' ? (
+                                                    <>
+                                                        <div className='col-3'>
+                                                            <h6 className='text-center'>Standard</h6>
+                                                            <button onClick={handleJante} className='btn btn-light'><img className='standard' src={state.jantepure[0]} alt="" /></button>
+
+                                                        </div>
+                                                        <div className='col-3'>
+                                                            <h6 className='text-center'>Sérac</h6>
+
+                                                            <button onClick={handleJante} className='btn btn-light'><img className='serac' src={state.jantepure[1]} alt="" /></button>
+
+                                                        </div>
+
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <h4 className='text-center'>Ce modéle est compatible qu'avec les jante 'Legend'</h4>
+
+                                                    </>
+                                                )}
+
+                                            </div>
+                                            {navConfig()}
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                </>
+                            )}
                         </>
                     ) : (
-                        <div className='container'>
-                            <Carousel array={state.modele} />
-                            <div className='row'>
-                                <div className='col-4 d-flex justify-content-center'>
-                                    <button onClick={handle}><img className='blanc' src={blanc} style={{ width: '300px' }} alt="" /></button>
+                        <>
+
+                            <div className='container-fluid'>
+
+                                <Carousel array={state.modele} />
+                                <div className='row'>
+                                    <div className='col-4 d-flex justify-content-center'>
+                                        <button onClick={handle}><img className='blanc' src={blanc} style={{ width: '300px' }} alt="" /></button>
+                                    </div>
+                                    <div className='col-4 d-flex justify-content-center'>
+                                        <button onClick={handle}><img className='bleu' src={bleu} style={{ width: '300px' }} alt="" /></button>
+                                    </div>
+                                    <div className='col-4 d-flex justify-content-center'>
+                                        <button onClick={handle}><img className='noir' src={noir} alt="" style={{ width: '300px' }} /></button>
+                                    </div>
                                 </div>
-                                <div className='col-4 d-flex justify-content-center'>
-                                    <button onClick={handle}><img className='bleu' src={bleu} style={{ width: '300px' }} alt="" /></button>
-                                </div>
-                                <div className='col-4 d-flex justify-content-center'>
-                                    <button onClick={handle}><img className='noir' src={noir} alt="" style={{ width: '300px' }} /></button>
-                                </div>
+
+                                {navConfig()}
                             </div>
-                            <button className='btn btn-secondary' onClick={next1}>Valider</button>
-                        </div>
+                        </>
                     )}
+                    { }
+
                 </>
             ) : (
                 <>
@@ -133,7 +237,7 @@ const Configurateur = () => {
                         <div className='row justify-content-around'>
                             <div className='col-3'>
                                 <h4 className='text-center'>Pure</h4>
-                                <button onClick={handleSelect} className='btn btn-light border border-1'>
+                                <button onClick={handleSelect} className='pure standard btn btn-light border border-1'>
                                     <img className='pure standard' src={pureImg} alt="" />
                                 </button>
                                 <table className='container-fluid'>
@@ -166,7 +270,7 @@ const Configurateur = () => {
                             </div>
                             <div className='col-3'>
                                 <h4 className='text-center'>Legend</h4>
-                                <button onClick={handleSelect} className='btn btn-light  border border-1'>
+                                <button onClick={handleSelect} className='legende btn btn-light  border border-1'>
                                     <img className='legende' src={legendImg} alt="" />
                                 </button>
                                 <table className='container-fluid'>
