@@ -94,9 +94,15 @@ const Configurateur = () => {
                                                     <button onClick={handleJante} className='btn btn-light'><img className='serac' src={state.jantepure[1]} alt="" /></button>
 
                                                 </div>
+                                                <button className='btn btn-secondary'>Valider</button>
+
                                             </>
                                         ) : (
-                                            <h4 className='text-center'>Ce modéle est compatible qu'avec les jante 'Legend'</h4>
+                                            <>
+                                                <h4 className='text-center'>Ce modéle est compatible qu'avec les jante 'Legend'</h4>
+
+                                                <button className='btn btn-secondary text-center' style={{ width: '150px' }}>Valider</button>
+                                            </>
                                         )}
                                     </div>
                                 </div>
@@ -116,7 +122,7 @@ const Configurateur = () => {
                                     <button onClick={handle}><img className='noir' src={noir} alt="" style={{ width: '300px' }} /></button>
                                 </div>
                             </div>
-                            <button className='btn btn-secondary' onClick={next1}>suivant</button>
+                            <button className='btn btn-secondary' onClick={next1}>Valider</button>
                         </div>
                     )}
                 </>
