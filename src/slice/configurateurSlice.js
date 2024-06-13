@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
     modele: [
         './configurateur/modele/legende/modele_legende-couleur_blanc-jante_legende-1.jpg',
@@ -7,6 +8,13 @@ const initialState = {
         './configurateur/modele/legende/modele_legende-couleur_blanc-jante_legende-3.jpg',
         './configurateur/modele/legende/modele_legende-couleur_blanc-jante_legende-4.jpg'
     ],
+    jantepure: [
+        './configurateur/jantes/vues/couleur-blanc_jante-standard.jpg',
+        './configurateur/jantes/vues/couleur-blanc_jante-serac.jpg',
+    ],
+    jantelegend: [
+        './configurateur/jantes/vues/couleur-blanc_jante-legende.jpg'
+    ]
 
 };
 
@@ -16,10 +24,33 @@ export const configurateurSlice = createSlice({
     reducers: {
         changementDeCouleur: (state, action) => {
             let color = action.payload['color']
+            console.log(color);
+            let modele = action.payload['modele']
+            console.log(modele);
+
+            let jante = action.payload['jante']
+            console.log(jante);
+
             for (let i = 1; i <= state.modele.length; i++) {
-                state.modele[i - 1] = `./configurateur/modele/legende/modele_legende-couleur_${color}-jante_legende-${i}.jpg`
+                state.modele[i - 1] = `./configurateur/modele/${modele}/modele_${modele}-couleur_${color}-jante_${jante}-${i}.jpg`
+
+            }
+            if (modele == 'pure') {
+                state.jantepure[0] = `./configurateur/jantes/vues/couleur-${color}_jante-standard.jpg`
+                state.jantepure[1] = `./configurateur/jantes/vues/couleur-${color}_jante-serac.jpg`
+            } else {
+                state.jantelegend[0] = `./configurateur/jantes/vues/couleur-${color}_jante-legende.jpg`
+            }
 
 
+
+        },
+        changementDeJante: (state, action) => {
+            let modele = action.payload['modele']
+            let color = action.payload['color']
+            let jante = action.payload['jante']
+            for (let i = 1; i <= state.modele.length; i++) {
+                state.modele[i - 1] = `./configurateur/modele/${modele}/modele_${modele}-couleur_${color}-jante_${jante}-${i}.jpg`
             }
         }
     }
@@ -28,3 +59,4 @@ export const configurateurSlice = createSlice({
 
 export default configurateurSlice.reducer;
 export const { changementDeCouleur } = configurateurSlice.actions
+export const { changementDeJante } = configurateurSlice.actions
