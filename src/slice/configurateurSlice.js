@@ -14,6 +14,15 @@ const initialState = {
     ],
     jantelegend: [
         './configurateur/jantes/vues/couleur-blanc_jante-legende.jpg'
+    ],
+    scelleriePure: [
+        './configurateur/interieurs/selection/cuir-noir_dinamica.jpg',
+        './configurateur/interieurs/selection/cuir-noir_perfore.jpg'
+    ],
+    scellerieLegende: [
+        './configurateur/interieurs/selection/cuir-noir.jpg',
+        './configurateur/interieurs/selection/cuir-brun.jpg'
+
     ]
 
 };
@@ -24,10 +33,7 @@ export const configurateurSlice = createSlice({
     reducers: {
         changementDeCouleur: (state, action) => {
             let color = action.payload['color']
-            console.log(color);
             let modele = action.payload['modele']
-            console.log(modele);
-
             let jante = action.payload['jante']
             console.log(jante);
 

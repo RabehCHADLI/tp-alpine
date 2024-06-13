@@ -1,5 +1,10 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
+:root {
+  color: #0251CA;
+}
+
+
 body.modal-open .gallery-container,
 body.modal-open .video-section {
   filter: blur(8px);
@@ -22,7 +27,8 @@ code {
 
 /* Navbar */
 .navbar {
-  background-color: #ffffff; /* Fondo blanco */
+  background-color: #ffffff;
+  /* Fondo blanco */
   padding: 10px 20px;
   position: absolute;
   top: 0;
@@ -59,17 +65,20 @@ code {
   transition: color 0.3s ease;
 }
 
-.nav-link:hover, .nav-link:focus, .nav-link.active {
-  color: #007bff; /* Color al pasar el ratón o al estar activo */
+.nav-link:hover,
+.nav-link:focus,
+.nav-link.active {
+  color: #007bff;
+  /* Color al pasar el ratón o al estar activo */
 }
 
 @media (max-width: 992px) {
   .navbar-nav {
-      margin-top: 10px;
+    margin-top: 10px;
   }
 
   .nav-item {
-      margin: 5px 0;
+    margin: 5px 0;
   }
 }
 
@@ -144,7 +153,8 @@ code {
 }
 
 .card img {
-  width: 50%; /* Ajusta el ancho de la imagen en la tarjeta */
+  width: 50%;
+  /* Ajusta el ancho de la imagen en la tarjeta */
   height: auto;
 }
 
@@ -214,4 +224,8 @@ code {
 
 .social-icons a:hover {
   color: #007bff;
+}
+
+.bg-blueAlpine {
+  background-color: #0251CA;
 }
