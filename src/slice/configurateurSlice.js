@@ -23,7 +23,33 @@ const initialState = {
         './configurateur/interieurs/selection/cuir-noir.jpg',
         './configurateur/interieurs/selection/cuir-brun.jpg'
 
+    ],
+    accessoiresExte: [
+        './configurateur/accessoires/exterieur/antivol-jantes.jpg',
+        './configurateur/accessoires/exterieur/cabochons-metal.jpg',
+        './configurateur/accessoires/exterieur/housse.jpg'
+    ],
+    accessoiresGarage: [
+        './configurateur/accessoires/garage/chargeur-batterie.jpg',
+        './configurateur/accessoires/garage/kit-outils.jpg'
+    ],
+    accessoiresInte: [
+        './configurateur/accessoires/interieur/filet-rangement.jpg',
+        './configurateur/accessoires/interieur/tapis-coffre.jpg'
+    ],
+    accessoiresMulti: [
+        './configurateur/accessoires/multimedia/support-camera.jpg',
+        './configurateur/accessoires/multimedia/support-smartphone.jpg'
+    ],
+    accessoiresProtec: [
+        './configurateur/accessoires/transport et protection/alarme.jpg',
+        './configurateur/accessoires/transport et protection/chaaine-neige.jpg',
+        './configurateur/accessoires/transport et protection/extincteur.jpg',
+        './configurateur/accessoires/transport et protection/fixation-extincteur.jpg',
+        './configurateur/accessoires/transport et protection/kit-securite.jpg',
+        './configurateur/accessoires/transport et protection/protection-obd.jpg'
     ]
+
 
 };
 

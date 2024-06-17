@@ -229,3 +229,7 @@ code {
 .bg-blueAlpine {
   background-color: #0251CA;
 }
+
+ul {
+  list-style: none;
+}
