@@ -20,7 +20,13 @@ const Configurateur = () => {
     const [selectColor, setSelectColor] = useState('blanc');
     const dispatch = useDispatch();
     const state = useSelector(state => state.configurateur);
-
+    const stateAuto = useState({
+        modele: 'legende',
+        couleur: 'blanc',
+        jante: 'legende',
+        accessoires: []
+    })
+    console.log(stateAuto[0]);
     function navConfig() {
         return (
             <div className='container-fluid mt-5' >
@@ -35,7 +41,7 @@ const Configurateur = () => {
                         <button onClick={next2} className='btn btn-secondary text-white bg-blueAlpine'>Scellerie</button>
                     </div>
                     <div className='col d-flex justify-content-center'>
-                        <button className='btn btn-secondary text-white bg-blueAlpine'>Equipements</button>
+                        <button onClick={next3} className='btn btn-secondary text-white bg-blueAlpine'>Equipements</button>
                     </div>
                     <div className='col d-flex justify-content-center'>
                         <button className='btn btn-secondary bg-blueAlpine text-white'>Accessoires</button>
@@ -45,13 +51,91 @@ const Configurateur = () => {
             </div>
         )
     }
+    function accessoires() {
+        return (
+            <div className="container">
+                <div className='row'>
+                    <div className="col-6">
+
+                        <Carousel array={state.accessoiresExte} />
+                    </div>
+                    <div className='col-6 mt-5'>
+                        <h3>Accessoires Extérieur</h3>
+                        <ul>
+                            <li><button value='51' className='btn'>AntiVol</button> <span>51€</span></li>
+                            <li><button className='btn'>cabochons</button><span>24€</span></li>
+                            <li><button className='btn'>housse</button><span>216€</span></li>
+                        </ul>
+
+                    </div>
+                    <div className="col-6">
+
+                        <Carousel array={state.accessoiresInte} />
+                    </div>
+                    <div className='col-6 mt-5'>
+                        <h3>Accessoires Intérieur</h3>
+                        <ul>
+                            <li><button value='51' className='btn'>AntiVol</button> <span>51€</span></li>
+                            <li><button className='btn'>cabochons</button><span>24€</span></li>
+                            <li><button className='btn'>housse</button><span>216€</span></li>
+                        </ul>
+
+                    </div>
+                    <div className="col-6">
+
+                        <Carousel array={state.accessoiresGarage} />
+                    </div>
+                    <div className='col-6 mt-5'>
+                        <h3>Accessoires de garage</h3>
+                        <ul>
+                            <li><button className='btn'>AntiVol</button> <span>51€</span></li>
+                            <li><button className='btn'>cabochons</button><span>24€</span></li>
+                            <li><button className='btn'>housse</button><span>216€</span></li>
+                        </ul>
+
+                    </div>
+                    <div className="col-6">
+
+                        <Carousel array={state.accessoiresMulti} />
+                    </div>
+                    <div className='col-6 mt-5'>
+                        <h3>Accessoires Multimedia</h3>
+                        <ul>
+                            <li><button value='51' className='btn'>AntiVol</button> <span>51€</span></li>
+                            <li><button className='btn'>cabochons</button><span>24€</span></li>
+                            <li><button className='btn'>housse</button><span>216€</span></li>
+                        </ul>
+
+                    </div>
+                    <div className="col-6">
+
+                        <Carousel array={state.accessoiresProtec} />
+                    </div>
+                    <div className='col-6 mt-5'>
+                        <h3>Accessoires de sécurité</h3>
+                        <ul>
+                            <li><button value='51' className='btn'>AntiVol</button> <span>51€</span></li>
+                            <li><button className='btn'>cabochons</button><span>24€</span></li>
+                            <li><button className='btn'>housse</button><span>216€</span></li>
+                        </ul>
+
+                    </div>
+                    {/* <Carousel array={state.accessoiresGarage} />
+                    <Carousel array={state.accessoiresInte} />
+                    <Carousel array={state.accessoiresExte} />
+                    <Carousel array={state.accessoiresGarage} /> */}
+                </div>
+            </div>
+        )
+    }
     function handleSelect(e) {
         setPureOuLegend(e.target.classList[0]);
         let jannte = e.target.classList[0];
         if (jannte === 'legende') {
             setJante('legende');
-            console.log('coucou');
+            stateAuto[0].modele = 'legende'
         } else {
+            stateAuto[0].modele = 'pure'
             setJante('standard');
         }
         console.log(jante);
@@ -60,6 +144,9 @@ const Configurateur = () => {
     function handle(e) {
         let couleur = e.target.classList[0];
         setSelectColor(couleur);
+        stateAuto[0].couleur = couleur
+
+
         let jannte = jante
         console.log(state.modele[0]);
 
@@ -95,6 +182,8 @@ const Configurateur = () => {
         setSelectJante(true);
         setSelectModele(true);
         setSelectSiege(false)
+        setSelectAccessoires(false)
+
 
         let jannte = 'standard';
 
@@ -113,11 +202,22 @@ const Configurateur = () => {
         setSelectModele(true);
         setSelectSiege(true)
     }
+    function next3(e) {
+        setSelectJante(true);
+        setSelectModele(true);
+        setSelectSiege(true)
+        setSelectAccessoires(true)
+    }
     function scellerie() {
         if (pureOuLegend == 'pure') {
             return (
-
-                <Carousel array={state.scelleriePure} />
+                <div className="container">
+                    < Carousel array={state.scelleriePure} />
+                    <div className='row justify-content-center'>
+                        <button className='btn btn-secondary col-3 me-3'>cuir noir dinamica</button>
+                        <button className='btn btn-secondary col-3 '>Cuir noir perfore</button>
+                    </div>
+                </div>
             )
 
         } else {
@@ -137,6 +237,8 @@ const Configurateur = () => {
 
         }
     }
+    console.log(stateAuto[0].modele);
+
     return (
         <>
             <NavLink to="/">
@@ -153,6 +255,8 @@ const Configurateur = () => {
                                     {
                                         selectAccessoires ? (
                                             <>
+                                                {accessoires()}
+                                                {navConfig()}
 
                                             </>
                                         ) : (
@@ -232,7 +336,7 @@ const Configurateur = () => {
                 </>
             ) : (
                 <>
-                    <h1 className='text-center'>Choisit le Modele</h1>
+                    <h1 className='text-center mt-4'>Modele disponible</h1>
                     <div className="container">
                         <div className='row justify-content-around'>
                             <div className='col-3'>
@@ -266,6 +370,10 @@ const Configurateur = () => {
                                         <td style={{ color: '#a3a4a5' }}>Carrosserie</td>
                                         <td>Coupé</td>
                                     </tr>
+                                    <tr>
+                                        <td style={{ color: '#a3a4a5' }}>Prix</td>
+                                        <td>54 700€</td>
+                                    </tr>
                                 </table>
                             </div>
                             <div className='col-3'>
@@ -298,6 +406,10 @@ const Configurateur = () => {
                                     <tr>
                                         <td style={{ color: '#a3a4a5' }}>Carrosserie</td>
                                         <td>Coupé</td>
+                                    </tr>
+                                    <tr>
+                                        <td style={{ color: '#a3a4a5' }}>Prix</td>
+                                        <td>58 500€</td>
                                     </tr>
                                 </table>
                             </div>
